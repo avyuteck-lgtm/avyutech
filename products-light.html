@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products — Avyu Technologies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800;900&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white: #FFFFFF;
+    --offwhite: #F4F7FB;
+    --offwhite2: #EBF0F8;
+    --navy: #0A192F;
+    --teal: #00868C;
+    --teal2: #00ADB5;
+    --teallight: rgba(0,134,140,0.09);
+    --teallight2: rgba(0,134,140,0.15);
+    --text: #1A2B42;
+    --text2: #3D5166;
+    --muted: #6B7E95;
+    --border: #D6E2EF;
+    --border2: rgba(0,134,140,0.22);
+    --shadow: 0 1px 3px rgba(10,25,47,0.06), 0 4px 16px rgba(10,25,47,0.08);
+    --shadow-lg: 0 8px 32px rgba(10,25,47,0.12), 0 2px 8px rgba(10,25,47,0.06);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--white); color: var(--text);
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 400; line-height: 1.6; overflow-x: hidden;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: radial-gradient(circle, rgba(0,134,140,0.07) 1px, transparent 1px);
+    background-size: 28px 28px; pointer-events: none; z-index: 0;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 6%; height: 70px;
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 1px 12px rgba(10,25,47,0.06);
+  }
+  .logo {
+    display: flex; align-items: center; gap: 10px; text-decoration: none;
+    font-family: 'Cabinet Grotesk', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--navy); letter-spacing: -0.02em;
+  }
+  .logo-mark {
+    width: 34px; height: 34px; background: var(--navy); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; font-weight: 900; color: var(--white);
+    flex-shrink: 0; position: relative; overflow: hidden;
+  }
+  .logo-mark::after { content: ''; position: absolute; bottom: 0; right: 0; width: 14px; height: 14px; background: var(--teal); border-radius: 3px 0 0 0; }
+  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--text2); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--teal); }
+  .nav-cta { padding: 9px 22px; background: var(--navy) !important; color: var(--white) !important; border-radius: 8px; font-weight: 600 !important; transition: background 0.2s !important; }
+  .nav-cta:hover { background: var(--teal) !important; }
+
+  /* PAGE HERO */
+  .page-hero {
+    position: relative; padding: 130px 6% 70px; z-index: 1;
+    border-bottom: 1px solid var(--border); text-align: center;
+    background: linear-gradient(160deg, var(--white) 0%, var(--offwhite) 100%);
+  }
+  .page-label {
+    display: inline-block; font-size: 0.75rem; color: var(--teal);
+    letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;
+    margin-bottom: 16px; padding: 5px 14px;
+    background: var(--teallight2); border: 1px solid var(--border2); border-radius: 100px;
+  }
+  .page-hero h1 {
+    font-family: 'Cabinet Grotesk', sans-serif;
+    font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 900;
+    letter-spacing: -0.04em; line-height: 1.1; color: var(--navy);
+    margin: 0 auto 16px; max-width: 640px;
+  }
+  .page-hero h1 span { color: var(--teal); }
+  .page-hero p { color: var(--muted); font-size: 1rem; line-height: 1.75; max-width: 560px; margin: 0 auto; }
+
+  /* PRODUCT NAV */
+  .product-nav {
+    position: relative; z-index: 1; padding: 22px 6%;
+    border-bottom: 1px solid var(--border);
+    background: var(--white);
+    display: flex; gap: 10px; flex-wrap: wrap;
+    box-shadow: 0 1px 6px rgba(10,25,47,0.04);
+  }
+  .product-nav a {
+    padding: 7px 16px; border: 1.5px solid var(--border); border-radius: 100px;
+    font-size: 0.83rem; color: var(--text2); text-decoration: none;
+    font-weight: 500; transition: all 0.2s; white-space: nowrap;
+    background: var(--white);
+  }
+  .product-nav a:hover { border-color: var(--teal); color: var(--teal); background: var(--teallight); }
+
+  /* PRODUCTS CONTAINER */
+  .products-container { position: relative; z-index: 1; padding: 70px 6%; display: flex; flex-direction: column; gap: 60px; }
+
+  /* PRODUCT BLOCK */
+  .product-block {
+    border: 1.5px solid var(--border); border-radius: 20px;
+    background: var(--white); overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    position: relative;
+  }
+  .product-block:hover { border-color: var(--border2); box-shadow: var(--shadow-lg); }
+  .product-block::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 0;
+    background: linear-gradient(90deg, var(--teal), var(--navy));
+    transition: height 0.3s;
+  }
+  .product-block:hover::before { height: 3px; }
+
+  /* PRODUCT HEADER */
+  .prod-header {
+    padding: 40px 44px 32px;
+    border-bottom: 1px solid var(--border);
+    display: grid; grid-template-columns: auto 1fr auto;
+    gap: 22px; align-items: start;
+    background: var(--offwhite);
+  }
+  .prod-icon {
+    width: 60px; height: 60px; background: var(--white);
+    border: 1.5px solid var(--border); border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.7rem; flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(10,25,47,0.08);
+  }
+  .prod-category { font-size: 0.73rem; color: var(--teal); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 6px; }
+  .prod-title-area h2 { font-family: 'Cabinet Grotesk', sans-serif; font-size: clamp(1.4rem, 2.5vw, 1.9rem); font-weight: 900; letter-spacing: -0.03em; color: var(--navy); margin-bottom: 10px; }
+  .prod-title-area p { color: var(--muted); font-size: 0.93rem; line-height: 1.75; max-width: 640px; }
+  .prod-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 14px; border-radius: 100px;
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .prod-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .badge-beta { background: rgba(234,179,8,0.1); color: #B45309; border: 1.5px solid rgba(234,179,8,0.3); }
+  .badge-pilot { background: var(--teallight2); color: var(--teal); border: 1.5px solid var(--border2); }
+  .badge-prototype { background: rgba(139,92,246,0.1); color: #7C3AED; border: 1.5px solid rgba(139,92,246,0.3); }
+  .badge-concept { background: rgba(249,115,22,0.1); color: #C2410C; border: 1.5px solid rgba(249,115,22,0.3); }
+  .badge-operational { background: rgba(34,197,94,0.1); color: #16A34A; border: 1.5px solid rgba(34,197,94,0.3); }
+
+  /* BODY & BOTTOM GRIDS */
+  .prod-body, .prod-bottom { display: grid; grid-template-columns: 1fr 1fr 1fr; }
+  .prod-bottom { border-top: 1px solid var(--border); background: var(--offwhite); }
+  .prod-body-col, .prod-bottom-col { padding: 32px 36px; border-right: 1px solid var(--border); }
+  .prod-body-col:last-child, .prod-bottom-col:last-child { border-right: none; }
+
+  .col-label {
+    font-size: 0.72rem; color: var(--teal); letter-spacing: 0.1em;
+    text-transform: uppercase; font-weight: 700; margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .col-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* LISTS */
+  .problem-list, .features-list, .steps-list, .users-list, .benefits-list, .roadmap-list {
+    list-style: none; display: flex; flex-direction: column; gap: 9px;
+  }
+  .problem-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.87rem; color: var(--text2); line-height: 1.5; }
+  .problem-list li::before { content: '⚠'; color: #EA580C; font-size: 0.78rem; flex-shrink: 0; margin-top: 2px; }
+
+  .features-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 14px; background: var(--white);
+    border: 1.5px solid var(--border); border-radius: 8px;
+    font-size: 0.87rem; color: var(--text); line-height: 1.4;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .features-list li:hover { background: var(--teallight); border-color: var(--border2); }
+  .feat-icon { color: var(--teal); font-size: 0.85rem; flex-shrink: 0; margin-top: 1px; }
+
+  .steps-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.87rem; color: var(--text2); line-height: 1.5; }
+  .step-num {
+    width: 22px; height: 22px; background: var(--teal); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; font-weight: 700; color: var(--white); flex-shrink: 0;
+  }
+
+  .users-list li { display: flex; align-items: center; gap: 10px; font-size: 0.87rem; color: var(--text2); }
+  .users-list li::before { content: '→'; color: var(--teal); font-weight: 700; font-size: 0.8rem; }
+
+  .benefits-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.87rem; color: var(--text2); line-height: 1.5; }
+  .benefits-list li::before { content: '✓'; color: #16A34A; font-weight: 700; font-size: 0.85rem; flex-shrink: 0; }
+
+  .roadmap-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.87rem; color: var(--text2); line-height: 1.5; }
+  .roadmap-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--teallight2); border: 2px solid var(--teal); flex-shrink: 0; margin-top: 5px; }
+
+  /* CTA STRIP */
+  .cta-strip {
+    position: relative; z-index: 1; margin: 0 6% 70px;
+    background: var(--navy);
+    border-radius: 16px; padding: 50px 48px;
+    display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap;
+  }
+  .cta-strip h3 { font-family: 'Cabinet Grotesk', sans-serif; font-size: 1.6rem; font-weight: 900; letter-spacing: -0.03em; color: var(--white); margin-bottom: 8px; }
+  .cta-strip p { color: rgba(255,255,255,0.55); font-size: 0.9rem; }
+  .btn-primary {
+    padding: 14px 32px; background: var(--teal); color: var(--white);
+    border: none; border-radius: 9px;
+    font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; font-weight: 600;
+    cursor: pointer; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: background 0.2s, transform 0.15s; white-space: nowrap;
+  }
+  .btn-primary:hover { background: var(--teal2); transform: translateY(-2px); }
+
+  footer {
+    position: relative; z-index: 1;
+    background: var(--offwhite); border-top: 1px solid var(--border);
+    padding: 36px 6%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+  }
+  footer p { color: var(--muted); font-size: 0.85rem; }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--teal); }
+
+  @media (max-width: 1100px) {
+    .prod-body, .prod-bottom { grid-template-columns: 1fr 1fr; }
+    .prod-body-col:nth-child(2) { border-right: none; }
+    .prod-body-col:nth-child(3) { border-top: 1px solid var(--border); border-right: none; grid-column: 1/-1; }
+    .prod-bottom-col:nth-child(2) { border-right: none; }
+    .prod-bottom-col:nth-child(3) { border-top: 1px solid var(--border); border-right: none; grid-column: 1/-1; }
+  }
+  @media (max-width: 768px) {
+    .prod-header { grid-template-columns: auto 1fr; }
+    .prod-badge { grid-column: 1/-1; }
+    .prod-body, .prod-bottom { grid-template-columns: 1fr; }
+    .prod-body-col, .prod-bottom-col { border-right: none !important; grid-column: auto !important; border-top: 1px solid var(--border); }
+    .prod-body-col:first-child { border-top: none; }
+    .prod-bottom-col:first-child { border-top: none; }
+    .prod-header { padding: 28px 24px; }
+    .prod-body-col, .prod-bottom-col { padding: 24px 28px; }
+    .cta-strip { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 640px) {
+    nav { padding: 0 4%; }
+    .page-hero, .products-container { padding-left: 4%; padding-right: 4%; }
+    .product-nav { padding: 16px 4%; }
+    .cta-strip { margin: 0 4% 60px; padding: 28px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index-light.html" class="logo">
+    <div class="logo-mark">AT</div>
+    Avyu Technologies
+  </a>
+  <ul class="nav-links">
+    <li><a href="index-light.html">Home</a></li>
+    <li><a href="products-light.html" class="active">Products</a></li>
+    <li><a href="about-light.html">About</a></li>
+    <li><a href="about-light.html#contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="page-label">Our Product Suite</div>
+  <h1>Purpose-Built <span>Security</span> Products</h1>
+  <p>Five specialized tools covering phishing detection, DPDP compliance, digital investigation, and IT security audits — built for the Indian cyber threat landscape.</p>
+</div>
+
+<div class="product-nav">
+  <a href="#phishingxdr">PhishingXDR</a>
+  <a href="#dpdp">DPDP Compliance</a>
+  <a href="#cdr">CDR Analyzer</a>
+  <a href="#crimesearch">Crime Search</a>
+  <a href="#audit">Mini IT Audit</a>
+</div>
+
+<div class="products-container">
+
+  <!-- 1. PhishingXDR -->
+  <div class="product-block" id="phishingxdr">
+    <div class="prod-header">
+      <div class="prod-title-area">
+        <div class="prod-category">Cybersecurity / Threat Detection Platform</div>
+        <h2>Avyu PhishingXDR</h2>
+        <p>An Extended Detection and Response (XDR) platform designed to detect, analyze, and respond to phishing attacks targeting organizations. Helps identify malicious emails, fake domains, and suspicious URLs before employees become victims.</p>
+      </div>
+      <div class="prod-badge badge-beta">Beta Testing</div>
+    </div>
+    <div class="prod-body">
+      <div class="prod-body-col">
+        <div class="col-label">Problem It Solves</div>
+        <ul class="problem-list">
+          <li>Credential theft via phishing emails</li>
+          <li>Business email compromise (BEC)</li>
+          <li>Malware delivery through email attachments</li>
+          <li>Fake domain impersonation attacks</li>
+          <li>Traditional email filters failing against advanced phishing</li>
+        </ul>
+      </div>
+      <div class="prod-body-col">
+        <div class="col-label">Key Features</div>
+        <ul class="features-list">
+          <li><span class="feat-icon">✦</span>Phishing email detection</li>
+          <li><span class="feat-icon">✦</span>Suspicious URL analysis</li>
+          <li><span class="feat-icon">✦</span>Domain impersonation monitoring</li>
+          <li><span class="feat-icon">✦</span>Email header analysis</li>
+          <li><span class="feat-icon">✦</span>Threat intelligence integration</li>
+          <li><span class="feat-icon">✦</span>Phishing incident alerts</li>
+          <li><span class="feat-icon">✦</span>Automated security reports</li>
+        </ul>
+      </div>
+      <div class="prod-body-col">
+        <div class="col-label">Target Users</div>
+        <ul class="users-list">
+          <li>Enterprises</li>
+          <li>IT security teams</li>
+          <li>SOC analysts</li>
+          <li>Managed Security Service Providers (MSSPs)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="prod-bottom">
+      <div class="prod-bottom-col">
+        <div class="col-label">How It Works</div>
+        <ol class="steps-list">
+          <li><span class="step-num">1</span>Email traffic is analyzed through the detection engine</li>
+          <li><span class="step-num">2</span>URLs and domains inspected for malicious patterns</li>
+          <li><span class="step-num">3</span>Suspicious messages are flagged automatically</li>
+          <li><span class="step-num">4</span>Security teams receive alerts and investigation reports</li>
+        </ol>
+      </div>
+      <div class="prod-bottom-col">
+        <div class="col-label">Benefits</div>
+        <ul class="benefits-list">
+          <li>Prevents credential theft</li>
+          <li>Reduces phishing risk across the organization</li>
+          <li>Improves security awareness</li>
+          <li>Supports incident response teams</li>
+        </ul>
+      </div>
+      <div class="prod-bottom-col">
+        <div class="col-label">Future Roadmap</div>
+        <ul class="roadmap-list">
+          <li><span class="roadmap-dot"></span>AI-powered phishing detection</li>
+          <li><span class="roadmap-dot"></span>Browser phishing protection</li>
+          <li><span class="roadmap-dot"></span>Employee phishing training module</li>
+          <li><span class="roadmap-dot"></span>API integration with email gateways</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. DPDP -->
+  <div class="product-block" id="dpdp">
+    <div class="prod-header">
+      <div class="prod-title-area">
+        <div class="prod-category">Data Privacy Compliance Platform</div>
+        <h2>Avyu DPDP Compliance Platform</h2>
+        <p>Helps organizations comply with India's Digital Personal Data Protection Act (DPDPA) 2023. Provides structured tools for data audits, privacy assessments, and compliance reporting to meet regulatory requirements confidently.</p>
+      </div>
+      <div class="prod-badge badge-pilot">Client Pilot</div>
+    </div>
+    <div class="prod-body">
+      <div class="prod-body-col">
+        <div class="col-label">Problem It Solves</div>
+        <ul class="problem-list">
+          <li>Lack of structured data inventory processes</li>
+          <li>No formal consent management framework</li>
+          <li>Missing privacy risk assessments</li>
+          <li>Absence of data protection documentation</li>
+          <li>Heavy financial penalties for non-compliance</li>
+        </ul>
+      </div>
+      <div class="prod-body-col">
+        <div class="col-label">Key Features</div>
+        <ul class="features-list">
+          <li><span class="feat-icon">✦</span>DPDP compliance assessment</li>
+          <li><span class="feat-icon">✦</span>Personal data inventory mapping</li>
+          <li><span class="feat-icon">✦</span>Consent management framework</li>
+          <li><span class="feat-icon">✦</span>Data Protection Impact Assessment (DPIA)</li>
+          <li><span class="feat-icon">✦</span>Risk scoring system</li>
+          <li><span class="feat-icon">✦</span>Compliance documentation generator</li>
+          <li><span class="feat-icon">✦</span>Privacy policy guidance</li>
+        </ul>
+      </div>
+      <div class="prod-body-col">
+        <div class="col-label">Target Users</div>
+        <ul class="users-list">
+          <li>Real Estate companies</li>
+          <li>Hospitals &amp; Healthcare</li>
+          <li>FinTech / NBFC firms</li>
+          <li>E-commerce businesses</li>
+          <li>Educational institutions</li>
+          <li>SaaS companies</li>
+        </ul>
+      </div>
+    </div>
+    <div class="prod-bottom">
+      <div class="prod-bottom-col">
+        <div class="col-label">How It Works</div>
+        <ol class="steps-list">
+          <li><span class="step-num">1</span>Organizations upload data processing details</li>
+          <li><span class="step-num">2</span>Platform analyzes compliance gaps automatically</li>
+          <li><span class="step-num">3</span>Risk scores generated per data category</li>
+          <li><span class="step-num">4</span>Compliance reports produced and exported</li>
+        </ol>
+      </div>
+      <div class="prod-bottom-col">
+        <div class="col-label">Benefits</div>
+        <ul class="benefits-list">
+          <li>Helps companies prepare for DPDP audits</li>
+          <li>Identifies privacy risks proactively</li>
+          <li>Generates compliance reports automatically</li>
+          <li>Reduces risk of regulatory penalties</li>
+        </ul>
+      </div>
+      <div class="prod-bottom-col">
+        <div class="col-label">Future Roadmap</div>
+        <ul class="roadmap-list">
+          <li><span class="roadmap-dot"></span>Automated consent tracking</li>
+          <li><span class="roadmap-dot"></span>Vendor data compliance monitoring</li>
+          <li><span class="roadmap-dot"></span>Breach notification automation</li>
+          <li><span class="roadmap-dot"></span>Privacy dashboard</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. CDR Analyzer -->
+  <div class="product-block" id="cdr">
+    <div class="prod-header">
+      <div class="prod-title-area">
+        <div class="prod-category">Digital Investigation Tool</div>
+        <h2>AT CDR Analyzer</h2>
+        <p>A telecom investigation tool used to analyze Call Detail Records (CDR) to identify communication patterns between individuals. Converts raw telecom data into visual investigation insights for law enforcement and digital forensic teams.</p>
+      </div>
+      <div class="prod-badge badge-prototype">Prototype</div>
+    </div>
+    <div class="prod-body">
+      <div class="prod-body-col">
+        <div class="col-label">Problem It Solves</div>
+        <ul class="problem-list">
+          <li>Thousands of call records too complex to analyze manually</li>
+          <li>Multiple phone numbers forming complex contact networks</li>
+          <li>Slow and inefficient investigation processes</li>
+          <li>Hidden relationships not visible in raw telecom data</li>
+        </ul>
+      </div>
+      <div class="prod-body-col">
+        <div class="col-label">Key Features</div>
+        <ul class="features-list">
+          <li><span class="feat-icon">✦</span>Call pattern analysis</li>
+          <li><span class="feat-icon">✦</span>Communication network mapping</li>
+          <li><span class="feat-icon">✦</span>Timeline reconstruction</li>
+          <li><span class="feat-icon">✦</span>Frequent contact identification</li>
+          <li><span class="feat-icon">✦</span>Tower location analysis</li>
+          <li><span class="feat-icon">✦</span>Investigation report generation</li>
+        </ul>
+      </div>
+      <div class="prod-body-col">
+        <div class="col-label">Target Users</div>
+        <ul class="users-list">
+          <li>Cybercrime investigators</li>
+          <li>Digital forensic experts</li>
+          <li>Law enforcement agencies</li>
+          <li>Private investigation firms</li>
+        </ul>
+      </div>
+    </div>
+    <div class="prod-bottom">
+      <div class="prod-bottom-col">
+        <div class="col-label">How It Works</div>
+        <ol class="steps-list">
+          <li><span class="step-num">1</span>Investigators upload CDR files into the platform</li>
+          <li><span class="step-num">2</span>System processes communication patterns automatically</li>
+          <li><span class="step-num">3</span>Network graphs visualize connections between numbers</li>
+          <li><span class="step-num">4</span>Reports highlight suspicious relationships and timelines</li>
+        </ol>
+      </div>
+      <div class="prod-bottom-col">
+        <div class="col-label">Benefits</div>
+        <ul class="benefits-list">
+          <li>Faster investigation turnaround</li>
+          <li>Clear visual communication mapping</li>
+          <li>Identifies hidden relationships in data</li>
+          <li>Improves overall intelligence analysis</li>
+        </ul>
+      </div>
+      <div class="prod-bottom-col">
+        <div class="col-label">Future Roadmap</div>
+        <ul class="roadmap-list">
+          <li><span class="roadmap-dot"></span>AI-based suspect behavior detection</li>
+          <li><span class="roadmap-dot"></span>Geo-location mapping</li>
+          <li><span class="roadmap-dot"></span>Multi-case analysis</li>
+          <li><span class="roadmap-dot"></span>Automated suspect ranking</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Crime Search -->
+  <div class="product-block" id="crimesearch">
+    <div class="prod-header">
+      <div class="prod-title-area">
+        <div class="prod-category">Investigation Intelligence Platform</div>
+        <h2>AT Crime Search</h2>
+        <p>A crime intelligence search platform that helps investigators quickly search and correlate crime-related data across different datasets. Supports digital investigations by enabling fast suspect information discovery and cross-case correlation.</p>
+      </div>
+      <div class="prod-badge badge-concept">Concept</div>
+    </div>
+    <div class="prod-body">
+      <div class="prod-body-col">
+        <div class="col-label">Problem It Solves</div>
+        <ul class="problem-list">
+          <li>Manually searching phone numbers across multiple systems</li>
+          <li>Correlating bank accounts and email addresses is slow</li>
+          <li>Linking previous fraud records across departments</li>
+          <li>Inefficient searching across disconnected data sources</li>
+        </ul>
+      </div>
+      <div class="prod-body-col">
+        <div class="col-label">Key Features</div>
+        <ul class="features-list">
+          <li><span class="feat-icon">✦</span>Crime intelligence search engine</li>
+          <li><span class="feat-icon">✦</span>Suspect data linking</li>
+          <li><span class="feat-icon">✦</span>Fraud pattern detection</li>
+          <li><span class="feat-icon">✦</span>Case intelligence dashboard</li>
+          <li><span class="feat-icon">✦</span>Investigation notes management</li>
+          <li><span class="feat-icon">✦</span>Data correlation engine</li>
+        </ul>
+      </div>
+      <div class="prod-body-col">
+        <div class="col-label">Target Users</div>
+        <ul class="users-list">
+          <li>Cybercrime police units</li>
+          <li>Fraud investigators</li>
+          <li>Digital forensic teams</li>
+          <li>Intelligence analysts</li>
+        </ul>
+      </div>
+    </div>
+    <div class="prod-bottom">
+      <div class="prod-bottom-col">
+        <div class="col-label">How It Works</div>
+        <ol class="steps-list">
+          <li><span class="step-num">1</span>Investigator searches using identifiers (phone, email, etc.)</li>
+          <li><span class="step-num">2</span>Platform scans all linked datasets simultaneously</li>
+          <li><span class="step-num">3</span>System identifies connections across records and cases</li>
+          <li><span class="step-num">4</span>Results displayed in organized investigation dashboard</li>
+        </ol>
+      </div>
+      <div class="prod-bottom-col">
+        <div class="col-label">Benefits</div>
+        <ul class="benefits-list">
+          <li>Faster suspect identification</li>
+          <li>Data correlation across multiple cases</li>
+          <li>Organized investigation management</li>
+          <li>Centralized intelligence repository</li>
+        </ul>
+      </div>
+      <div class="prod-bottom-col">
+        <div class="col-label">Future Roadmap</div>
+        <ul class="roadmap-list">
+          <li><span class="roadmap-dot"></span>Integration with OSINT sources</li>
+          <li><span class="roadmap-dot"></span>Automated fraud risk scoring</li>
+          <li><span class="roadmap-dot"></span>Case management system</li>
+          <li><span class="roadmap-dot"></span>Link analysis visualization</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Mini IT Audit -->
+  <div class="product-block" id="audit">
+    <div class="prod-header">
+      <div class="prod-title-area">
+        <div class="prod-category">Cybersecurity Audit Tool</div>
+        <h2>AT Mini IT Audit Tool</h2>
+        <p>A lightweight cybersecurity auditing platform designed for small and medium businesses (SMBs). Helps organizations assess their basic cybersecurity posture, identify security gaps, and generate actionable audit reports quickly.</p>
+      </div>
+      <div class="prod-badge badge-operational">Operational</div>
+    </div>
+    <div class="prod-body">
+      <div class="prod-body-col">
+        <div class="col-label">Problem It Solves</div>
+        <ul class="problem-list">
+          <li>SMBs operating with weak passwords and poor data protection</li>
+          <li>Lack of formal security policies and documentation</li>
+          <li>Outdated software and unpatched systems</li>
+          <li>No structured cybersecurity assessments in place</li>
+        </ul>
+      </div>
+      <div class="prod-body-col">
+        <div class="col-label">Key Features</div>
+        <ul class="features-list">
+          <li><span class="feat-icon">✦</span>IT security checklist</li>
+          <li><span class="feat-icon">✦</span>Cyber risk scoring</li>
+          <li><span class="feat-icon">✦</span>Policy compliance checks</li>
+          <li><span class="feat-icon">✦</span>Security gap analysis</li>
+          <li><span class="feat-icon">✦</span>Automated audit report generation</li>
+        </ul>
+      </div>
+      <div class="prod-body-col">
+        <div class="col-label">Target Users</div>
+        <ul class="users-list">
+          <li>Small businesses</li>
+          <li>Startups</li>
+          <li>IT consultants</li>
+          <li>Compliance auditors</li>
+        </ul>
+      </div>
+    </div>
+    <div class="prod-bottom">
+      <div class="prod-bottom-col">
+        <div class="col-label">How It Works</div>
+        <ol class="steps-list">
+          <li><span class="step-num">1</span>Organization answers a structured security questionnaire</li>
+          <li><span class="step-num">2</span>System evaluates current cybersecurity practices</li>
+          <li><span class="step-num">3</span>Risk score generated per security category</li>
+          <li><span class="step-num">4</span>Detailed audit report created and exported</li>
+        </ol>
+      </div>
+      <div class="prod-bottom-col">
+        <div class="col-label">Benefits</div>
+        <ul class="benefits-list">
+          <li>Quick cybersecurity assessment in minutes</li>
+          <li>Identifies security weaknesses clearly</li>
+          <li>Improves overall security readiness</li>
+          <li>Supports compliance preparation</li>
+        </ul>
+      </div>
+      <div class="prod-bottom-col">
+        <div class="col-label">Future Roadmap</div>
+        <ul class="roadmap-list">
+          <li><span class="roadmap-dot"></span>Automated vulnerability scanning</li>
+          <li><span class="roadmap-dot"></span>Cloud security checks</li>
+          <li><span class="roadmap-dot"></span>Compliance modules (ISO 27001, etc.)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="cta-strip">
+  <div>
+    <h3>Interested in a Product Demo?</h3>
+    <p>Reach out to our team to explore how Avyu Technologies can help secure your organization.</p>
+  </div>
+  <a href="about-light.html#contact" class="btn-primary">Contact Us →</a>
+</div>
+
+<footer>
+  <p>© 2025 Avyu Technologies. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="index-light.html">Home</a>
+    <a href="products-light.html">Products</a>
+    <a href="about-light.html">About</a>
+    <a href="about-light.html#contact">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
