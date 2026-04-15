@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DPDP Act 2023 — India's Digital Future</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy: #e8edf8;
+      --deep: #ffffff;
+      --indigo: #1a2370;
+      --blue: #2541b2;
+      --cyan: #1a6fd4;
+      --gold: #1a4fa8;
+      --white: #0d1a40;
+      --muted: #4a5a7a;
+      --card-bg: rgba(37,65,178,0.05);
+      --border: rgba(26,111,212,0.18);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: #ffffff;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── ANIMATED BACKGROUND ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(37,65,178,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 80%, rgba(26,111,212,0.05) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 50% 50%, rgba(232,237,248,0.6) 0%, transparent 80%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── GRID OVERLAY ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(26,111,212,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26,111,212,0.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 68px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      color: var(--cyan);
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      display: inline-block;
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      color: white;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 6px 14px;
+      border-radius: 6px;
+      transition: all 0.2s;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover { color: var(--white); background: rgba(255,255,255,0.07); }
+
+    .nav-avyu {
+      background: linear-gradient(135deg, var(--blue), var(--cyan)) !important;
+      color: white !important;
+      padding: 8px 20px !important;
+      border-radius: 8px !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.5px;
+      box-shadow: 0 0 20px rgba(0,198,255,0.3);
+      transition: all 0.25s !important;
+    }
+
+    .nav-avyu:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 28px rgba(0,198,255,0.45) !important;
+      background: rgba(0,0,0,0) !important;
+      color: var(--cyan) !important;
+      outline: 1.5px solid var(--cyan);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 5% 60px;
+      overflow: hidden;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,198,255,0.1);
+      border: 1px solid rgba(0,198,255,0.3);
+      border-radius: 999px;
+      padding: 6px 18px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 28px;
+      animation: fadeDown 0.7s ease both;
+    }
+
+    .hero-badge .dot {
+      width: 7px; height: 7px;
+      background: var(--cyan);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -1px;
+      animation: fadeDown 0.8s 0.1s ease both;
+    }
+
+    .hero h1 .accent { color: var(--cyan); }
+    .hero h1 .year {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 4px;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--muted);
+      max-width: 640px;
+      margin: 24px auto 0;
+      line-height: 1.7;
+      animation: fadeDown 0.9s 0.2s ease both;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 40px;
+      animation: fadeDown 1s 0.3s ease both;
+    }
+
+    .btn {
+      padding: 14px 32px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #1a2370, #2541b2);
+      color: #ffffff;
+      box-shadow: 0 4px 24px rgba(37,65,178,0.25);
+    }
+
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(37,65,178,0.4); }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--border);
+      color: var(--white);
+    }
+
+    .btn-outline:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(0,198,255,0.05); }
+
+    /* ── STATS ROW ── */
+    .stats {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stat-item {
+      background: #ffffff;
+      padding: 32px 28px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: var(--cyan);
+      letter-spacing: 2px;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-top: 6px;
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 90px 5%;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      max-width: 580px;
+      line-height: 1.8;
+      font-size: 0.98rem;
+    }
+
+    /* ── OVERVIEW ── */
+    .overview {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .overview { grid-template-columns: 1fr; gap: 40px; }
+      nav .nav-links { display: none; }
+    }
+
+    .overview-visual {
+      position: relative;
+      height: 420px;
+    }
+
+    .shield {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px; height: 230px;
+    }
+
+    .shield-path {
+      fill: none;
+      stroke: var(--cyan);
+      stroke-width: 2;
+      filter: drop-shadow(0 0 12px rgba(0,198,255,0.6));
+    }
+
+    .shield-inner {
+      fill: rgba(0,198,255,0.08);
+    }
+
+    .orbit {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      animation: spin 20s linear infinite;
+    }
+
+    .orbit-1 { width: 300px; height: 300px; }
+    .orbit-2 { width: 420px; height: 420px; animation-duration: 30s; animation-direction: reverse; }
+
+    .orbit-dot {
+      position: absolute;
+      width: 10px; height: 10px;
+      background: var(--cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--cyan);
+      top: -5px; left: 50%; transform: translateX(-50%);
+    }
+
+    .orbit-dot-2 {
+      background: var(--gold);
+      box-shadow: 0 0 10px var(--gold);
+      top: 50%; left: -5px; transform: translateY(-50%);
+    }
+
+    /* ── KEY FEATURES ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 48px auto 0;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 28px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(0,198,255,0.35);
+      transform: translateY(-4px);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .feature-card:hover::before { opacity: 1; }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .feature-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--white);
+    }
+
+    .feature-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── RIGHTS ── */
+    .rights-section { background: rgba(37,65,178,0.04); }
+
+    .rights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      max-width: 1200px;
+      margin: 48px auto 0;
+    }
+
+    .right-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 22px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      transition: all 0.25s;
+    }
+
+    .right-card:hover { border-color: var(--gold); transform: translateX(4px); }
+
+    .right-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      color: var(--gold);
+      line-height: 1;
+      min-width: 40px;
+    }
+
+    .right-content h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .right-content p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── PENALTIES ── */
+    .penalties-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 48px auto 0;
+    }
+
+    .penalty-card {
+      background: rgba(245,200,66,0.04);
+      border: 1px solid rgba(245,200,66,0.2);
+      border-radius: 16px;
+      padding: 28px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .penalty-card::after {
+      content: '₹';
+      position: absolute;
+      bottom: -20px; right: 10px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 8rem;
+      color: rgba(245,200,66,0.05);
+      pointer-events: none;
+    }
+
+    .penalty-amount {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+
+    .penalty-unit {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-left: 6px;
+    }
+
+    .penalty-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin: 10px 0 8px;
+    }
+
+    .penalty-desc {
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      max-width: 800px;
+      margin: 48px auto 0;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 28px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--cyan), var(--blue), transparent);
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 28px;
+      margin-bottom: 36px;
+      padding-left: 72px;
+      position: relative;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 20px;
+      top: 4px;
+      width: 16px; height: 16px;
+      background: var(--cyan);
+      border-radius: 50%;
+      border: 3px solid #ffffff;
+      box-shadow: 0 0 10px var(--cyan);
+    }
+
+    .timeline-content {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      flex: 1;
+    }
+
+    .timeline-date {
+      font-size: 0.78rem;
+      color: var(--cyan);
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .timeline-title {
+      font-weight: 700;
+      margin-bottom: 6px;
+      font-size: 0.98rem;
+    }
+
+    .timeline-desc {
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── OBLIGATIONS ── */
+    .obligations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 48px auto 0;
+    }
+
+    .obligation-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 24px;
+      border-left: 3px solid var(--blue);
+      transition: all 0.25s;
+    }
+
+    .obligation-card:hover { border-left-color: var(--cyan); transform: translateY(-3px); }
+
+    .obligation-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 10px; }
+    .obligation-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── EXEMPTIONS ── */
+    .exemptions-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 14px;
+      max-width: 1000px;
+      margin: 40px auto 0;
+    }
+
+    .exemption-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .exemption-item:hover { border-color: var(--cyan); }
+
+    .exemption-item .check {
+      width: 22px; height: 22px;
+      background: rgba(0,198,255,0.15);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--cyan);
+      font-size: 0.7rem;
+      flex-shrink: 0;
+    }
+
+    /* ── DPB SECTION ── */
+    .dpb-section {
+      background: linear-gradient(135deg, rgba(26,35,112,0.3), rgba(37,65,178,0.15));
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dpb-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) { .dpb-grid { grid-template-columns: 1fr; } }
+
+    .dpb-points {
+      list-style: none;
+      margin-top: 24px;
+    }
+
+    .dpb-points li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 18px;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .dpb-points li .icon { color: var(--cyan); font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+
+    .dpb-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px;
+      text-align: center;
+    }
+
+    .dpb-card .big-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem;
+      color: var(--cyan);
+      line-height: 1;
+    }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      background: linear-gradient(135deg, #e8f0fb 0%, #dce8f8 100%);
+      border: 1.5px solid rgba(26,111,212,0.18);
+      border-radius: 24px;
+      padding: 64px 48px;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-banner::before {
+	  content: '';
+	  position: absolute;
+	  inset: 0;
+	  background: radial-gradient(ellipse 60% 60% at 50% 0%, rgba(26,111,212,0.08), transparent 70%);
+	  pointer-events: none;
+	  z-index: 0;
+	}
+
+    .cta-banner h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      color: #0d1a40;
+      position: relative;
+    }
+
+    .cta-banner p {
+      font-size: 0.98rem;
+      color: #4a5a7a;
+      margin: 16px 0 32px;
+      line-height: 1.7;
+      position: relative;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 40px 5%;
+      text-align: center;
+    }
+
+    footer .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 3px;
+      color: var(--cyan);
+      margin-bottom: 10px;
+    }
+
+    footer p {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    footer a { color: var(--cyan); text-decoration: none; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes spin {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+      50% { transform: translate(-50%, -50%) translateY(-12px); }
+    }
+
+    .shield { animation: float 4s ease-in-out infinite; }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* Tag chips */
+    .tag {
+      display: inline-block;
+      background: rgba(0,198,255,0.1);
+      border: 1px solid rgba(0,198,255,0.25);
+      color: var(--cyan);
+      border-radius: 999px;
+      padding: 3px 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-right: 6px;
+      margin-bottom: 6px;
+    }
+
+    .max-w { max-width: 1200px; margin-left: auto; margin-right: auto; }
+
+    /* ── COUNTDOWN SECTION ── */
+    .countdown-section {
+      position: relative;
+      z-index: 1;
+      padding: 80px 5%;
+      background: linear-gradient(135deg, rgba(26,35,112,0.06) 0%, rgba(37,65,178,0.04) 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .countdown-header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+
+    .countdown-phases {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .phase-card {
+      background: rgba(255,255,255,0.85);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px 24px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+      box-shadow: 0 2px 20px rgba(37,65,178,0.06);
+    }
+
+    .phase-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 40px rgba(37,65,178,0.14);
+    }
+
+    .phase-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+    }
+
+    .phase-card.phase-done::before {
+      background: linear-gradient(90deg, #22c55e, #16a34a);
+    }
+
+    .phase-card.phase-next::before {
+      background: linear-gradient(90deg, #f59e0b, #d97706);
+    }
+
+    .phase-card.phase-final::before {
+      background: linear-gradient(90deg, var(--blue), #7c3aed);
+    }
+
+    .phase-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+
+    .phase-badge.done { background: rgba(34,197,94,0.12); color: #16a34a; }
+    .phase-badge.upcoming { background: rgba(245,158,11,0.12); color: #d97706; }
+    .phase-badge.future { background: rgba(37,65,178,0.1); color: var(--blue); }
+
+    .phase-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .phase-date-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .phase-date-label strong { color: var(--blue); }
+
+    .countdown-blocks {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .cd-block {
+      flex: 1;
+      background: rgba(37,65,178,0.06);
+      border: 1px solid rgba(37,65,178,0.12);
+      border-radius: 10px;
+      padding: 12px 6px 8px;
+      text-align: center;
+    }
+
+    .cd-block.done-block {
+      background: rgba(34,197,94,0.06);
+      border-color: rgba(34,197,94,0.2);
+    }
+
+    .cd-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      line-height: 1;
+      color: var(--blue);
+      letter-spacing: 1px;
+    }
+
+    .cd-block.done-block .cd-num { color: #16a34a; }
+
+    .cd-label {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .phase-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .phase-desc strong { color: var(--white); }
+
+    .done-stamp {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.25);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 16px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #16a34a;
+    }
+
+    /* Progress bar */
+    .compliance-progress {
+      max-width: 1100px;
+      margin: 40px auto 0;
+      background: rgba(255,255,255,0.8);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 32px;
+    }
+
+    .progress-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    .progress-track {
+      position: relative;
+      height: 10px;
+      background: rgba(37,65,178,0.1);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #22c55e, var(--cyan), var(--blue));
+      border-radius: 999px;
+      transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .progress-milestones {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .progress-milestones span { font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ NAVBAR ═══ -->
+<nav>
+  <a href="#" class="nav-logo">
+    </span> DPDP ACT
+  </a>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#countdown">Countdown</a></li>
+    <li><a href="#rights">Your Rights</a></li>
+    <li><a href="#obligations">Obligations</a></li>
+    <li><a href="#penalties">Penalties</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+	<li>
+	  <a href="https://dpdpaudit.streamlit.app"
+		 target="_blank"
+		 rel="noopener noreferrer">
+		 Dpdp Audit Tool
+	  </a>
+	</li>
+    <li><a href="https://www.avyu.tech" target="_blank" rel="noopener" class="nav-avyu">Avyu.tech ↗</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════════════════════════════════ HERO ═══ -->
+<section class="hero">
+  <div class="hero-badge"><span class="dot"></span> India's Landmark Data Law</div>
+  <h1>
+    Digital Personal<br/>
+    <span class="accent">Data Protection</span><br/>
+    <span class="year">Act · 2023</span>
+  </h1>
+  <p class="hero-sub">
+    India's first comprehensive data privacy legislation — empowering citizens, governing data fiduciaries, and building a trusted digital economy.
+  </p>
+  <div class="hero-cta">
+    <a href="#overview" class="btn btn-primary">Explore the Act</a>
+
+  <a href="https://dpdpaudit.streamlit.app"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="btn btn-primary">
+     Open DPDP Audit Tool
+  </a>
+
+  <a href="https://www.avyu.tech" target="_blank" class="btn btn-outline">
+    Visit Avyu.tech ↗
+  </a>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════ STATS ═══ -->
+<div class="stats">
+  <div class="stat-item">
+    <div class="stat-num">40+</div>
+    <div class="stat-label">Sections</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">₹250 Cr</div>
+    <div class="stat-label">Max Penalty</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">7</div>
+    <div class="stat-label">Key Rights</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">2023</div>
+    <div class="stat-label">Year Enacted</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">1.4 Bn</div>
+    <div class="stat-label">Citizens Protected</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ COUNTDOWN ═══ -->
+<section class="countdown-section" id="countdown">
+  <div class="countdown-header reveal">
+    <p class="section-label">Enforcement Timeline</p>
+    <h2 class="section-title">Countdown to Full Compliance</h2>
+    <p class="section-desc" style="max-width:600px; margin:0 auto;">The DPDP Act rolls out in 3 phases. Track exactly how many days remain until each deadline.</p>
+  </div>
+
+  <div class="countdown-phases">
+
+    <!-- Phase 1 – DONE -->
+    <div class="phase-card phase-done reveal">
+      <div class="phase-badge done">✓ Phase 1 — Complete</div>
+      <div class="phase-title">Data Protection Board Established</div>
+      <div class="phase-date-label"><strong>13 November 2025</strong> — Already in Force</div>
+      <div class="done-stamp">This phase is now active</div>
+      <p class="phase-desc">
+        <strong>Rules 1, 2 &amp; 17–21</strong> are live. The Data Protection Board of India (DPBI) has been formally constituted in the NCR with 4 members. Administrative and procedural provisions are now operative.
+      </p>
+    </div>
+
+    <!-- Phase 2 – UPCOMING -->
+    <div class="phase-card phase-next reveal">
+      <div class="phase-badge upcoming">Phase 2 — Upcoming</div>
+      <div class="phase-title">Consent Manager Registration</div>
+      <div class="phase-date-label">Target: <strong>13 November 2026</strong></div>
+      <div class="countdown-blocks" id="cd-phase2">
+        <div class="cd-block"><div class="cd-num" id="p2-days">--</div><div class="cd-label">Days</div></div>
+        <div class="cd-block"><div class="cd-num" id="p2-hrs">--</div><div class="cd-label">Hrs</div></div>
+        <div class="cd-block"><div class="cd-num" id="p2-min">--</div><div class="cd-label">Min</div></div>
+        <div class="cd-block"><div class="cd-num" id="p2-sec">--</div><div class="cd-label">Sec</div></div>
+      </div>
+      <p class="phase-desc">
+        <strong>Rule 4</strong> activates — Consent Managers can register with the DPBI. Organizations must prepare their consent architecture and Consent Manager integrations ahead of this deadline.
+      </p>
+    </div>
+
+    <!-- Phase 3 – FINAL -->
+    <div class="phase-card phase-final reveal">
+      <div class="phase-badge future">Phase 3 — Full Enforcement</div>
+      <div class="phase-title">All Substantive Provisions Active</div>
+      <div class="phase-date-label">Target: <strong>13 May 2027</strong></div>
+      <div class="countdown-blocks" id="cd-phase3">
+        <div class="cd-block"><div class="cd-num" id="p3-days">--</div><div class="cd-label">Days</div></div>
+        <div class="cd-block"><div class="cd-num" id="p3-hrs">--</div><div class="cd-label">Hrs</div></div>
+        <div class="cd-block"><div class="cd-num" id="p3-min">--</div><div class="cd-label">Min</div></div>
+        <div class="cd-block"><div class="cd-num" id="p3-sec">--</div><div class="cd-label">Sec</div></div>
+      </div>
+      <p class="phase-desc">
+        <strong>Rules 3, 5–16, 22 &amp; 23</strong> come into force — covering consent notices, security safeguards, breach reporting, data erasure, children's data, cross-border transfers, and penalties up to <strong>₹250 Crore</strong>.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Overall Progress Bar -->
+  <div class="compliance-progress reveal">
+    <div class="progress-title">Overall Implementation Progress</div>
+    <div class="progress-track">
+      <div class="progress-fill" id="overall-progress" style="width: 0%"></div>
+    </div>
+    <div class="progress-milestones">
+      <span>Aug 2023 · Enacted</span>
+      <span>Nov 2025 · Phase 1 ✓</span>
+      <span>Nov 2026 · Phase 2</span>
+      <span>May 2027 · Full Force</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ OVERVIEW ═══ -->
+<section id="overview">
+  <div class="overview">
+    <div class="reveal">
+      <p class="section-label">About the Act</p>
+      <h2 class="section-title">What is the DPDP Act?</h2>
+      <p class="section-desc">
+        The Digital Personal Data Protection Act, 2023 was passed by India's Parliament and received Presidential assent on <strong style="color:var(--white)">11 August 2023</strong>. It establishes a legal framework for the processing of digital personal data, balancing the right to privacy of individuals with the need to process data for lawful purposes.
+      </p>
+      <br/>
+      <p class="section-desc">
+        It applies to the processing of digital personal data <strong style="color:var(--white)">within India</strong> as well as outside India if it involves offering goods or services to individuals in India.
+      </p>
+      <br/>
+      <div>
+        <span class="tag">Data Fiduciary</span>
+        <span class="tag">Data Principal</span>
+        <span class="tag">Consent Framework</span>
+        <span class="tag">Data Localisation</span>
+        <span class="tag">Cross-Border Transfer</span>
+        <span class="tag">DPB</span>
+      </div>
+    </div>
+    <div class="overview-visual reveal">
+      <div class="orbit orbit-1"><div class="orbit-dot"></div></div>
+      <div class="orbit orbit-2"><div class="orbit-dot orbit-dot-2"></div></div>
+      <div class="shield">
+        <svg viewBox="0 0 200 230" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path class="shield-inner" d="M100 10 L180 50 L180 130 Q180 190 100 220 Q20 190 20 130 L20 50 Z"/>
+          <path class="shield-path" d="M100 10 L180 50 L180 130 Q180 190 100 220 Q20 190 20 130 L20 50 Z"/>
+          <text x="100" y="125" text-anchor="middle" fill="#00c6ff" font-family="Bebas Neue" font-size="28" letter-spacing="2">DPDP</text>
+          <text x="100" y="150" text-anchor="middle" fill="#2541b2" font-family="DM Sans" font-size="11" font-weight="600">ACT 2023</text>
+          <circle cx="100" cy="80" r="22" fill="none" stroke="#00c6ff" stroke-width="1.5" opacity="0.5"/>
+          <text x="100" y="86" text-anchor="middle" fill="#00c6ff" font-size="20"></text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ FEATURES ═══ -->
+<section style="background: rgba(26,35,112,0.08);">
+  <div class="max-w">
+    <div class="reveal" style="text-align:center;">
+      <p class="section-label">Core Pillars</p>
+      <h2 class="section-title">Key Features of the Act</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <span class="feature-icon"></span>
+        <h3 class="feature-title">Consent-Based Processing</h3>
+        <p class="feature-desc">Personal data must be processed only for a lawful purpose, with free, specific, informed, unconditional, and unambiguous consent of the Data Principal.</p>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon"></span>
+        <h3 class="feature-title">Purpose Limitation</h3>
+        <p class="feature-desc">Data can only be collected for a specific, clear, and lawful purpose and cannot be used for any other purpose without re-consent.</p>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon"></span>
+        <h3 class="feature-title">Data Minimisation</h3>
+        <p class="feature-desc">Only the data that is necessary for the specified purpose should be collected — no excess or superfluous data collection is allowed.</p>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon"></span>
+        <h3 class="feature-title">Cross-Border Transfers</h3>
+        <p class="feature-desc">Personal data may be transferred to notified countries/territories. The government may restrict transfers to certain jurisdictions as needed.</p>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon"></span>
+        <h3 class="feature-title">Significant Data Fiduciaries</h3>
+        <p class="feature-desc">Entities processing large volumes of data will be designated as "Significant Data Fiduciaries" and face heightened obligations including DPO appointments and audits.</p>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon"></span>
+        <h3 class="feature-title">Children's Data Protection</h3>
+        <p class="feature-desc">Processing of children's (under 18) personal data requires verifiable parental consent. Tracking or behavioural monitoring of children is prohibited.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ RIGHTS ═══ -->
+<section id="rights" class="rights-section">
+  <div class="max-w">
+    <div class="reveal" style="text-align:center;">
+      <p class="section-label">Data Principal Rights</p>
+      <h2 class="section-title">Your Rights Under the Act</h2>
+      <p class="section-desc" style="margin:0 auto;">Every Indian citizen whose data is processed has the following statutory rights guaranteed under the DPDP Act 2023.</p>
+    </div>
+    <div class="rights-grid">
+      <div class="right-card reveal">
+        <div class="right-num">01</div>
+        <div class="right-content">
+          <h4>Right to Information</h4>
+          <p>Right to obtain a summary of personal data being processed and activities undertaken with it by the Data Fiduciary.</p>
+        </div>
+      </div>
+      <div class="right-card reveal">
+        <div class="right-num">02</div>
+        <div class="right-content">
+          <h4>Right to Correction & Erasure</h4>
+          <p>Right to correct inaccurate or misleading personal data, complete incomplete data, update outdated data, or request erasure.</p>
+        </div>
+      </div>
+      <div class="right-card reveal">
+        <div class="right-num">03</div>
+        <div class="right-content">
+          <h4>Right to Withdraw Consent</h4>
+          <p>The Data Principal may withdraw consent at any time. Withdrawal does not affect the lawfulness of processing done prior to withdrawal.</p>
+        </div>
+      </div>
+      <div class="right-card reveal">
+        <div class="right-num">04</div>
+        <div class="right-content">
+          <h4>Right to Grievance Redressal</h4>
+          <p>Right to readily available means of grievance redressal before the Data Fiduciary or Consent Manager within a defined timeframe.</p>
+        </div>
+      </div>
+      <div class="right-card reveal">
+        <div class="right-num">05</div>
+        <div class="right-content">
+          <h4>Right to Nominate</h4>
+          <p>Right to nominate another individual who shall, in the event of death or incapacity, exercise the rights of the Data Principal.</p>
+        </div>
+      </div>
+      <div class="right-card reveal">
+        <div class="right-num">06</div>
+        <div class="right-content">
+          <h4>Right to Complain to DPB</h4>
+          <p>If a grievance is not resolved by the Data Fiduciary, the Data Principal may file a complaint with the Data Protection Board of India.</p>
+        </div>
+      </div>
+      <div class="right-card reveal">
+        <div class="right-num">07</div>
+        <div class="right-content">
+          <h4>Right to Access Data</h4>
+          <p>Right to request a copy of personal data held by the Data Fiduciary in a structured, readable format as per the rules specified.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ OBLIGATIONS ═══ -->
+<section id="obligations">
+  <div class="max-w">
+    <div class="reveal">
+      <p class="section-label">Compliance</p>
+      <h2 class="section-title">Obligations of Data Fiduciaries</h2>
+      <p class="section-desc">Organisations that collect and process personal data must meet these mandatory obligations.</p>
+    </div>
+    <div class="obligations-grid">
+      <div class="obligation-card reveal">
+        <h4>Security Safeguards</h4>
+        <p>Implement appropriate technical and organisational measures to ensure security of personal data and prevent data breaches.</p>
+      </div>
+      <div class="obligation-card reveal">
+        <h4>Breach Notification</h4>
+        <p>In the event of a personal data breach, promptly notify the Data Protection Board and each affected Data Principal.</p>
+      </div>
+      <div class="obligation-card reveal">
+        <h4>Data Erasure</h4>
+        <p>Erase personal data when the purpose for which it was collected is no longer being served or when consent is withdrawn.</p>
+      </div>
+      <div class="obligation-card reveal">
+        <h4>Accurate Data</h4>
+        <p>Ensure the personal data processed is complete, accurate, and consistent — especially for data used to make decisions affecting the Data Principal.</p>
+      </div>
+      <div class="obligation-card reveal">
+        <h4>DPO Appointment</h4>
+        <p>Significant Data Fiduciaries must appoint a Data Protection Officer (DPO) based in India, responsible for compliance and grievance redressal.</p>
+      </div>
+      <div class="obligation-card reveal">
+        <h4>Audits & Assessment</h4>
+        <p>Significant Data Fiduciaries must conduct periodic Data Protection Impact Assessments (DPIA) and independent data audits.</p>
+      </div>
+      <div class="obligation-card reveal">
+        <h4>Consent Notice</h4>
+        <p>Before collecting data, provide a clear and plain-language notice describing what data is collected, the purpose, and the rights available.</p>
+      </div>
+      <div class="obligation-card reveal">
+        <h4>Third Party Due Diligence</h4>
+        <p>Data Fiduciaries remain responsible for data processed by Data Processors on their behalf and must ensure contractual compliance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ PENALTIES ═══ -->
+<section id="penalties" style="background: rgba(6,11,30,0.5);">
+  <div class="max-w">
+    <div class="reveal" style="text-align:center;">
+      <p class="section-label">Enforcement</p>
+      <h2 class="section-title">Penalties & Fines</h2>
+      <p class="section-desc" style="margin:0 auto;">The Act prescribes significant financial penalties to ensure compliance and deter violations.</p>
+    </div>
+    <div class="penalties-grid">
+      <div class="penalty-card reveal">
+        <div class="penalty-amount">₹250 Cr<span class="penalty-unit">Max</span></div>
+        <h4 class="penalty-title">Breach of Children's Data</h4>
+        <p class="penalty-desc">Failure to protect children's personal data or track/monitor children's online behaviour without consent.</p>
+      </div>
+      <div class="penalty-card reveal">
+        <div class="penalty-amount">₹200 Cr<span class="penalty-unit">Max</span></div>
+        <h4 class="penalty-title">Failure to Notify Breach</h4>
+        <p class="penalty-desc">Non-notification of a personal data breach to the Data Protection Board and affected individuals in a timely manner.</p>
+      </div>
+      <div class="penalty-card reveal">
+        <div class="penalty-amount">₹150 Cr<span class="penalty-unit">Max</span></div>
+        <h4 class="penalty-title">Fiduciary Duty Violations</h4>
+        <p class="penalty-desc">Violations of obligations by Significant Data Fiduciaries, including inadequate security safeguards or improper data processing.</p>
+      </div>
+      <div class="penalty-card reveal">
+        <div class="penalty-amount">₹10 Cr<span class="penalty-unit">Max</span></div>
+        <h4 class="penalty-title">Data Principal Violations</h4>
+        <p class="penalty-desc">Penalties for Data Principals who impersonate others, suppress information, or file frivolous complaints with the Board.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ DPB ═══ -->
+<section class="dpb-section">
+  <div class="dpb-grid">
+    <div class="reveal">
+      <p class="section-label">Regulator</p>
+      <h2 class="section-title">Data Protection Board of India</h2>
+      <p class="section-desc">The DPDP Act establishes the Data Protection Board of India (DPB) as the independent adjudicatory body to enforce the law.</p>
+      <ul class="dpb-points">
+        <li><span class="icon"></span> Adjudicates complaints and grievances from Data Principals</li>
+        <li><span class="icon"></span> Conducts suo motu inquiries into data breaches</li>
+        <li><span class="icon"></span> Has power to impose financial penalties on violators</li>
+        <li><span class="icon"></span> Operates as a digital-first, paperless body</li>
+        <li><span class="icon"></span> Decisions are appealable before the Telecom Disputes Settlement Appellate Tribunal (TDSAT)</li>
+      </ul>
+    </div>
+    <div class="dpb-card reveal">
+      <div class="big-num">DPB</div>
+      <p style="color:var(--cyan); font-family:'Bebas Neue'; font-size:1.2rem; letter-spacing:2px; margin-top:4px;">Data Protection Board</p>
+      <p style="color:var(--muted); font-size:0.85rem; margin-top:16px; line-height:1.7;">An independent statutory authority under the Ministry of Electronics & Information Technology (MeitY), tasked with enforcement and adjudication under the DPDP Act 2023.</p>
+      <hr style="border-color:var(--border); margin:24px 0;"/>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        <div style="text-align:center;">
+          <div style="font-family:'Bebas Neue'; font-size:2rem; color:var(--blue);">Digital</div>
+          <div style="font-size:0.78rem; color:var(--muted);">First Body</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'Bebas Neue'; font-size:2rem; color:var(--blue);">TDSAT</div>
+          <div style="font-size:0.78rem; color:var(--muted);">Appeals Authority</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ TIMELINE ═══ -->
+<section id="timeline">
+  <div class="max-w">
+    <div class="reveal" style="text-align:center;">
+      <p class="section-label">Legislative Journey</p>
+      <h2 class="section-title">Timeline of the DPDP Act</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">2017</div>
+          <div class="timeline-title">Puttaswamy Judgment</div>
+          <p class="timeline-desc">The Supreme Court of India unanimously ruled that privacy is a fundamental right under the Indian Constitution — setting the stage for data protection legislation.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">2018</div>
+          <div class="timeline-title">Srikrishna Committee Report</div>
+          <p class="timeline-desc">Justice B.N. Srikrishna's committee released a white paper followed by a draft Personal Data Protection Bill outlining a framework for India.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">2019–2022</div>
+          <div class="timeline-title">PDP Bill Iterations</div>
+          <p class="timeline-desc">The Personal Data Protection Bill 2019 was introduced in Parliament and referred to a Joint Parliamentary Committee. After extensive deliberations, the original bill was withdrawn in 2022.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">July 2023</div>
+          <div class="timeline-title">DPDP Bill Introduced</div>
+          <p class="timeline-desc">A revised, leaner Digital Personal Data Protection Bill 2023 was introduced in the Lok Sabha. It passed both houses of Parliament swiftly.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot" style="background: var(--blue); box-shadow: 0 0 10px var(--blue);"></div>
+        <div class="timeline-content" style="border-color: rgba(37,65,178,0.3);">
+          <div class="timeline-date" style="color:var(--blue);">11 August 2023</div>
+          <div class="timeline-title">Presidential Assent </div>
+          <p class="timeline-desc">The Digital Personal Data Protection Act 2023 received Presidential assent and was published in the Official Gazette — becoming the law of the land.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot" style="background: #22c55e; box-shadow: 0 0 10px #22c55e;"></div>
+        <div class="timeline-content" style="border-color: rgba(34,197,94,0.3);">
+          <div class="timeline-date" style="color:#16a34a;">13 November 2025</div>
+          <div class="timeline-title">Phase 1 — DPDP Rules Notified ✓</div>
+          <p class="timeline-desc">MeitY officially notified the DPDP Rules, 2025 and the Data Protection Board of India (DPBI) was constituted. Rules 1, 2 &amp; 17–21 came into immediate effect.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot" style="background: #f59e0b; box-shadow: 0 0 10px #f59e0b;"></div>
+        <div class="timeline-content" style="border-color: rgba(245,158,11,0.3); border-style: dashed;">
+          <div class="timeline-date" style="color:#d97706;">13 November 2026</div>
+          <div class="timeline-title">Phase 2 — Consent Manager Ecosystem</div>
+          <p class="timeline-desc">Rule 4 activates — Consent Managers can register with the DPBI. Organizations must have consent architectures ready.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot" style="background: var(--muted); box-shadow: none; border-style: dashed;"></div>
+        <div class="timeline-content" style="border-style: dashed;">
+          <div class="timeline-date" style="color:var(--muted);">13 May 2027</div>
+          <div class="timeline-title">Phase 3 — Full Enforcement Begins</div>
+          <p class="timeline-desc">All substantive provisions come into force — consent notices, security safeguards, breach reporting, data erasure, children's data protections, and cross-border transfer rules. Full penalties (up to ₹250 Cr) apply.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ EXEMPTIONS ═══ -->
+<section style="background: rgba(26,35,112,0.08);">
+  <div class="max-w">
+    <div class="reveal" style="text-align:center;">
+      <p class="section-label">Scope</p>
+      <h2 class="section-title">Exemptions Under the Act</h2>
+      <p class="section-desc" style="margin:0 auto;">Certain entities and purposes are exempt from all or some provisions of the Act.</p>
+    </div>
+    <div class="exemptions-list">
+      <div class="exemption-item reveal"><div class="check">✓</div>State security & sovereignty purposes</div>
+      <div class="exemption-item reveal"><div class="check">✓</div>Prevention & detection of offences</div>
+      <div class="exemption-item reveal"><div class="check">✓</div>Research, archiving & statistical purposes</div>
+      <div class="exemption-item reveal"><div class="check">✓</div>Startups & small-scale processors (notified)</div>
+      <div class="exemption-item reveal"><div class="check">✓</div>Personal or domestic purposes by individuals</div>
+      <div class="exemption-item reveal"><div class="check">✓</div>Publicly available personal data</div>
+      <div class="exemption-item reveal"><div class="check">✓</div>Processing for employment & benefit purposes</div>
+      <div class="exemption-item reveal"><div class="check">✓</div>Medical emergencies & public health situations</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ CTA ═══ -->
+<section>
+  <div class="cta-banner reveal">
+    <h2>Stay Compliant. Protect Your Data.</h2>
+    <p>Whether you're a startup, enterprise, or individual, understanding your obligations under the DPDP Act is now critical. Visit <a href="https://www.avyu.tech" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline; font-weight:600;">Avyu.tech</a> for expert guidance.</p>
+    <a href="https://www.avyu.tech"
+	   target="_blank"
+	   rel="noopener noreferrer"
+	   class="btn btn-primary"
+	   onclick="window.open('https://www.avyu.tech','_blank')"
+	   style="font-size:1rem; padding:16px 40px; cursor:pointer;">
+	   Visit Avyu.tech ↗
+	</a>
+	<a href="https://dpdpaudit.streamlit.app"
+	   target="_blank"
+	   rel="noopener noreferrer"
+	   class="btn btn-primary"
+	   style="margin-top:15px;">
+	   Run DPDP Audit Tool
+	</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ FOOTER ═══ -->
+<footer>
+  <div class="footer-logo">DPDP ACT 2023</div>
+  <p>India's Digital Personal Data Protection Act — Protecting every citizen's digital rights.</p>
+  <p style="margin-top:12px;">Powered by <a href="https://www.avyu.tech" target="_blank">Avyu.tech</a> · For informational purposes only · Always consult a legal professional.</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // ── COUNTDOWN TIMER ──
+  function updateCountdown() {
+    const now = new Date();
+
+    // Phase 2: 13 Nov 2026 midnight IST (UTC+5:30)
+    const phase2 = new Date('2026-11-13T00:00:00+05:30');
+    // Phase 3: 13 May 2027 midnight IST
+    const phase3 = new Date('2027-05-13T00:00:00+05:30');
+
+    function calcDiff(target) {
+      const diff = target - now;
+      if (diff <= 0) return { days: 0, hrs: 0, min: 0, sec: 0, done: true };
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hrs  = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const min  = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const sec  = Math.floor((diff % (1000 * 60)) / 1000);
+      return { days, hrs, min, sec, done: false };
+    }
+
+    const d2 = calcDiff(phase2);
+    const d3 = calcDiff(phase3);
+
+    document.getElementById('p2-days').textContent = d2.days;
+    document.getElementById('p2-hrs').textContent  = String(d2.hrs).padStart(2,'0');
+    document.getElementById('p2-min').textContent  = String(d2.min).padStart(2,'0');
+    document.getElementById('p2-sec').textContent  = String(d2.sec).padStart(2,'0');
+
+    document.getElementById('p3-days').textContent = d3.days;
+    document.getElementById('p3-hrs').textContent  = String(d3.hrs).padStart(2,'0');
+    document.getElementById('p3-min').textContent  = String(d3.min).padStart(2,'0');
+    document.getElementById('p3-sec').textContent  = String(d3.sec).padStart(2,'0');
+
+    // Progress bar: from Aug 11 2023 (enactment) to May 13 2027 (full force)
+    const start   = new Date('2023-08-11T00:00:00+05:30');
+    const end     = new Date('2027-05-13T00:00:00+05:30');
+    const elapsed = now - start;
+    const total   = end - start;
+    const pct     = Math.min(100, Math.max(0, (elapsed / total) * 100)).toFixed(1);
+    const bar = document.getElementById('overall-progress');
+    if (bar) bar.style.width = pct + '%';
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // Animated counter
+  function animateCounter(el, target, suffix = '') {
+    let start = 0;
+    const duration = 1800;
+    const step = (timestamp) => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.floor(eased * target) + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+</script>
+</body>
+</html>
