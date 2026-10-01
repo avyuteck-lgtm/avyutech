@@ -325,9 +325,30 @@
     }
 
     @media (max-width: 768px) {
-      .overview { grid-template-columns: 1fr; gap: 40px; }
-      nav .nav-links { display: none; }
-    }
+	  .overview {
+	    grid-template-columns: 1fr;
+	    gap: 40px;
+	  }
+	
+	  /* Show only Jobs button on mobile */
+	  nav .nav-links {
+	    display: flex;
+	    align-items: center;
+	  }
+	
+	  nav .nav-links li {
+	    display: none;
+	  }
+	
+	  nav .nav-links li:has(.nav-jobs) {
+	    display: block;
+	  }
+	
+	  .nav-jobs {
+	    padding: 7px 14px !important;
+	    font-size: 0.8rem !important;
+	  }
+	}
 
     .overview-visual {
       position: relative;
