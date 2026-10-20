@@ -7,6 +7,27 @@
    Open this file in Notepad, fill in the values between the quotes,
    save, and upload the file to your website. Nothing else to change.
    ================================================================ */
+
+   // AVYU ₹99 limited-time offer — India Standard Time
+   (function () {
+     const parts = new Intl.DateTimeFormat("en-CA", {
+       timeZone: "Asia/Kolkata",
+       year: "numeric",
+       month: "2-digit",
+       day: "2-digit"
+     }).formatToParts(new Date());
+   
+     const date = Object.fromEntries(
+       parts.map(part => [part.type, part.value])
+     );
+   
+     const today = `${date.year}-${date.month}-${date.day}`;
+   
+     window.AVYU_OFFER_ACTIVE =
+       today >= "2026-10-20" &&
+       today <= "2026-10-21";
+   })();
+   
 window.AVYU_SETTINGS = {
 
   // 1. LIVE JOBS (recommended). Get a free App ID and App Key at
@@ -29,7 +50,7 @@ window.AVYU_SETTINGS = {
   //    Setup steps are at the top of avyu-portal-backend.gs.
   requireSubscription: true,           // false = portal open to everyone, no login
   backendUrl: "https://script.google.com/macros/s/AKfycbxib-OyfNloRI66ZsF71jJf0_-IQuyMCSQdmydnCihqVl-Jrf0A5_ZRyCjIOSoz32wy/exec",                      // the Web app URL from Google Apps Script (ends in /exec)
-  price: 1499,                         // membership price in rupees
+  price: window.AVYU_OFFER_ACTIVE ? 99 : 1499,
   validityText: "12 months of access", // shown under the price. Keep it matching ACCESS_DAYS in the script
   upiId: "8374917259@kotakbank",       // your UPI ID, e.g. "avyutech@icici". Shows a QR code with the amount filled in
   upiName: "Avyu Technologies",        // payee name shown in the UPI app
@@ -469,6 +490,12 @@ html.gated .wrap{display:none}
       <aside class="g-price" aria-label="Membership price">
         <p class="g-for">Portal membership</p>
         <p class="g-amt" data-price>₹1,499</p>
+         <p id="offerNotice"
+            style="color:#b42318;font-weight:bold;"
+            hidden>
+           🔥 LIMITED-TIME OFFER: ₹99!
+           Ends 21 October 2026 at 11:59 PM IST.
+         </p>
         <p class="g-valid" id="gValid" hidden></p>
         <p class="g-once">One-time payment. Nothing renews automatically.</p>
         <a class="btn g-cta" href="#subscribe">Subscribe for <span data-price>₹1,499</span></a>
